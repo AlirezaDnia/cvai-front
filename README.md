@@ -1,36 +1,91 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# cvai — AI-Driven Resume Workshop
 
-## Getting Started
+`cvai` is a high-performance, minimalist AI-driven resume builder built for the 2026 job market.  
+Designed to bridge the gap between technical infrastructure and career conversion, it enables professionals to optimize and tailor their profiles against specific applicant tracking systems (ATS) and job roles in real time.
 
-First, run the development server:
+---
+
+## ⚡ Architecture & Tech Stack
+
+The frontend architecture utilizes a decoupled, modern ecosystem focused on performance, strict type safety, and micro-component design principles.
+
+- **Framework:** Next.js 16 (App Router)
+- **Language:** TypeScript 5.x (Strict Mode)
+- **Styling & UI:** Tailwind CSS & shadcn/ui (Radix Primitives)
+- **State & Forms:** React Hook Form + Zod Validation
+- **Data Layer:** Native Fetch Client wrapped with automated Bearer token injection
+
+---
+
+## 📂 Core Project Directory Structure
+
+```text
+src/
+├── app/
+│   ├── (auth)/
+│   ├── dashboard/
+│   └── resumes/[id]/optimize
+├── components/
+│   ├── auth/
+│   └── ui/
+├── lib/
+│   └── api-client.ts
+└── types/
+    ├── auth.ts
+    └── resume.ts
+```
+
+---
+
+## ⚙️ REST API Integration Matrix
+
+| Method | Endpoint                     | Access    | Payload / Purpose                            |
+| ------ | ---------------------------- | --------- | -------------------------------------------- |
+| POST   | `/api/register`              | Public    | `{ first_name, last_name, email, password }` |
+| POST   | `/api/login`                 | Public    | Auth exchange → Sanctum Bearer Token         |
+| POST   | `/api/resumes`               | Protected | `{ title, template_id }`                     |
+| POST   | `/api/resumes/{id}/optimize` | Protected | `{ target_job }`                             |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 20.x or higher
+- npm / yarn / pnpm
+
+### Installation
+
+```bash
+git clone https://github.com/your-username/cvai-front.git
+cd cvai-front
+npm install
+```
+
+### Environment Setup
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:8000
+```
+
+### Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🛠️ Git Workflow Standards
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- feat: new features
+- fix: bug fixes
+- chore: maintenance
+- docs: documentation updates
